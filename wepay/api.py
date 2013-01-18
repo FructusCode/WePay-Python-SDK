@@ -6,13 +6,14 @@ class WePay(object):
     A client for the WePay API.
     """
     
-    def __init__(self, production=True, access_token=None):
+    def __init__(self, production=True, access_token=None, store_token=True):
         """
         :param bool production: When ``False``, the ``stage.wepay.com`` API
             server will be used instead of the default production.
         :param str access_token: The access token associated with your
             application.
         """
+        self.store_token = store_token
         self.access_token = access_token
         if production:
             self.api_endpoint = "https://wepayapi.com/v2"
@@ -98,5 +99,6 @@ class WePay(object):
             'code': code,
         }
         response = self.call('/oauth2/token', params)
-        self.access_token = response['access_token']
+        if self.store_token:
+            self.access_token = response['access_token']
         return response

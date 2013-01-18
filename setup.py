@@ -1,6 +1,7 @@
 from distutils.core import setup
 import wepay
 import os.path
+import setuptools
 
 long_description = open('README.rst').read() if os.path.isfile('README.srt') else 'A Python SDK for our WePay API'
 
